@@ -189,6 +189,7 @@ def plot_heatmaps(confusions, model_names):
         axes[i].set_ylabel("Actual")
 
     plt.tight_layout()
+    plt.savefig('src/results/confusion.png')
     plt.show()
 
 

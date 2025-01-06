@@ -20,14 +20,14 @@ def build_cnn_model(vocab_size, max_len, embedding_dim=50):
     """
     model = Sequential([
         Embedding(70, embedding_dim, input_length=max_len),
-        Conv1D(16,kernel_size=3, activation='tanh'),
+        Conv1D(32,kernel_size=3, activation='relu'),
         MaxPooling1D(4),
         Flatten(),
         Dense(2,activation="tanh"),
         Dropout(0.4),
         Dense(1,activation="sigmoid"),
     ])
-    model.compile(optimizer=Adam(learning_rate=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=Adam(learning_rate=0.0001), loss='binary_crossentropy', metrics=['accuracy'])
     save_model_architecture(model,"CNN_architecture.png")
     model.summary()
     return model
@@ -39,7 +39,8 @@ def build_lstm_model(vocab_size, max_len, embedding_dim=50):
     """
     model = Sequential([
         Embedding(70,embedding_dim, input_length=max_len,trainable=True),
-        Bidirectional(LSTM(16, return_sequences=False)),
+        Bidirectional(LSTM(32, return_sequences=False)),
+        Dense(2,activation="linear"),
         BatchNormalization(),
         Dense(1, activation="sigmoid")
     ])
