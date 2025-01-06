@@ -39,13 +39,12 @@ def build_lstm_model(vocab_size, max_len, embedding_dim=50):
     """
     model = Sequential([
         Embedding(70,embedding_dim, input_length=max_len,trainable=True),
-        Bidirectional(LSTM(8, return_sequences=True)),
-        # LSTM(1, return_sequences=False),
+        Bidirectional(LSTM(16, return_sequences=False)),
         BatchNormalization(),
         Dense(1, activation="sigmoid")
     ])
-    # optimizer = Adam(learning_rate=0.001)
-    model.compile( loss='binary_crossentropy', metrics=['accuracy'])
+    
+    model.compile(optimizer = Adam(learning_rate=0.0001), loss='binary_crossentropy', metrics=['accuracy'])
     save_model_architecture(model, "LSTM_architecture.png")
     model.summary()
     return model
@@ -96,8 +95,10 @@ def train_model(model, X_train, y_train, X_test, y_test, model_name, epochs=20, 
     process = psutil.Process()
     initial_memory = process.memory_info().rss
 
+
     print(f"Training {model_name} model...")
     early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
+   
     history = model.fit(
         X_train,
         y_train,

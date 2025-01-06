@@ -151,8 +151,9 @@ def plot_comparison_bar_chart(metrics_list):
     plt.ylabel("Performance")
     plt.title("Performance Comparison of Models")
     plt.legend(loc="right")
+    plt.savefig('src/results/performance_metrics.png')
     plt.show()
-
+    plt.close()
 
 # def plot_heatmap(confusion, model_name):
 #     """
@@ -212,6 +213,7 @@ def plot_roc_curves(y_tests, y_preds, model_names):
     plt.ylabel("True Positive Rate")
     plt.legend()
     plt.grid()
+    plt.savefig('src/results/roc_curve.png')
     plt.show()
 
 # def plot_computational_cost(metrics_list):

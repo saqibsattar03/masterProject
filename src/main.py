@@ -21,8 +21,7 @@ def main():
     cnn_model, cnn_history, cnn_time, cnn_memory = train_model(cnn_model, X_train, y_train, X_test, y_test, "CNN")
     metrics.append({"Model": "CNN", "Training Time": cnn_time, "Memory Usage (MB)": cnn_memory})
 
-    print(f"X_train shape: {X_train.shape}, y_train shape: {y_train.shape}")
-    print(f"X_test shape: {X_test.shape}, y_test shape: {y_test.shape}")
+   
     # Train LSTM model
     lstm_model = build_lstm_model(vocab_size, max_len)
     lstm_model, lstm_history, lstm_time, lstm_memory = train_model(lstm_model, X_train, y_train, X_test, y_test, "LSTM")
