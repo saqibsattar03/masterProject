@@ -33,14 +33,14 @@ def build_cnn_model(vocab_size, max_len, embedding_dim=50):
     return model
 
 
-def build_lstm_model(vocab_size, max_len, embedding_dim=10):
+def build_lstm_model(vocab_size, max_len, embedding_dim=50):
     """
     Building LSTM model.
     """
     model = Sequential([
-        Embedding(70,embedding_dim, input_length=max_len,trainable=False),
-        # Bidirectional(LSTM(16, return_sequences=True)),
-        LSTM(1, return_sequences=False),
+        Embedding(70,embedding_dim, input_length=max_len,trainable=True),
+        Bidirectional(LSTM(8, return_sequences=True)),
+        # LSTM(1, return_sequences=False),
         BatchNormalization(),
         Dense(1, activation="sigmoid")
     ])
@@ -90,14 +90,14 @@ def build_hybrid_model(vocab_size, max_len, embedding_dim=50, dropout_rate=0.4):
     model.summary()
     return model
 
-def train_model(model, X_train, y_train, X_test, y_test, model_name, epochs=1, batch_size=64):
+def train_model(model, X_train, y_train, X_test, y_test, model_name, epochs=20, batch_size=64):
     # Measure time and memory
     start_time = time.time()
     process = psutil.Process()
     initial_memory = process.memory_info().rss
 
     print(f"Training {model_name} model...")
-    early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+    early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
     history = model.fit(
         X_train,
         y_train,

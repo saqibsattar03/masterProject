@@ -17,16 +17,16 @@ def main():
     metrics = []
 
     # Train CNN model
-    # cnn_model = build_cnn_model(vocab_size, max_len)
-    # cnn_model, cnn_history, cnn_time, cnn_memory = train_model(cnn_model, X_train, y_train, X_test, y_test, "CNN")
-    # metrics.append({"Model": "CNN", "Training Time": cnn_time, "Memory Usage (MB)": cnn_memory})
+    cnn_model = build_cnn_model(vocab_size, max_len)
+    cnn_model, cnn_history, cnn_time, cnn_memory = train_model(cnn_model, X_train, y_train, X_test, y_test, "CNN")
+    metrics.append({"Model": "CNN", "Training Time": cnn_time, "Memory Usage (MB)": cnn_memory})
 
     print(f"X_train shape: {X_train.shape}, y_train shape: {y_train.shape}")
     print(f"X_test shape: {X_test.shape}, y_test shape: {y_test.shape}")
     # Train LSTM model
-    # lstm_model = build_lstm_model(vocab_size, max_len)
-    # lstm_model, lstm_history, lstm_time, lstm_memory = train_model(lstm_model, X_train, y_train, X_test, y_test, "LSTM")
-    # metrics.append({"Model": "LSTM", "Training Time": lstm_time, "Memory Usage (MB)": lstm_memory})
+    lstm_model = build_lstm_model(vocab_size, max_len)
+    lstm_model, lstm_history, lstm_time, lstm_memory = train_model(lstm_model, X_train, y_train, X_test, y_test, "LSTM")
+    metrics.append({"Model": "LSTM", "Training Time": lstm_time, "Memory Usage (MB)": lstm_memory})
 
     # Train Hybrid model
     hybrid_model = build_hybrid_model(vocab_size, max_len)
@@ -35,34 +35,34 @@ def main():
     metrics.append({"Model": "Hybrid", "Training Time": hybrid_time, "Memory Usage (MB)": hybrid_memory})
 
     # Evaluate Models
-    # cnn_metrics = evaluate_model(cnn_model, X_test, y_test, "CNN")
-    # lstm_metrics = evaluate_model(lstm_model, X_test, y_test, "LSTM")
+    cnn_metrics = evaluate_model(cnn_model, X_test, y_test, "CNN")
+    lstm_metrics = evaluate_model(lstm_model, X_test, y_test, "LSTM")
     hybrid_metrics = evaluate_model(hybrid_model,[ X_test,X_test], y_test, "Hybrid")
 
     # Plot Combined Subplots
-    # plot_subplots([cnn_history, lstm_history, hybrid_history], ["CNN", "LSTM", "Hybrid"])
+    plot_subplots([cnn_history, lstm_history, hybrid_history], ["CNN", "LSTM", "Hybrid"])
 
     # Plot Performance Comparison
-    # plot_comparison_bar_chart([cnn_metrics, lstm_metrics, hybrid_metrics])
+    plot_comparison_bar_chart([cnn_metrics, lstm_metrics, hybrid_metrics])
 
     # Confusion Matrices
-    # cnn_confusion = confusion_matrix(y_test, (cnn_model.predict(X_test) >= 0.5).astype(int))
-    # lstm_confusion = confusion_matrix(y_test, (lstm_model.predict(X_test) >= 0.5).astype(int))
+    cnn_confusion = confusion_matrix(y_test, (cnn_model.predict(X_test) >= 0.5).astype(int))
+    lstm_confusion = confusion_matrix(y_test, (lstm_model.predict(X_test) >= 0.5).astype(int))
     hybrid_confusion = confusion_matrix(y_test, (hybrid_model.predict([X_test, X_test]) >= 0.5).astype(int))
 
     # Plot Combined Heatmaps
-    # plot_heatmaps([cnn_confusion, lstm_confusion, hybrid_confusion], ["CNN", "LSTM", "Hybrid"])
+    plot_heatmaps([cnn_confusion, lstm_confusion, hybrid_confusion], ["CNN", "LSTM", "Hybrid"])
 
     # Plot Combined ROC Curves
-    # plot_roc_curves(
-    #     [y_test, y_test, y_test],
-    #     [
-    #         cnn_metrics["y_pred"],
-    #         lstm_metrics["y_pred"],
-    #         hybrid_metrics["y_pred"]
-    #     ],
-    #     ["CNN", "LSTM", "Hybrid"]
-    # )
+    plot_roc_curves(
+        [y_test, y_test, y_test],
+        [
+            cnn_metrics["y_pred"],
+            lstm_metrics["y_pred"],
+            hybrid_metrics["y_pred"]
+        ],
+        ["CNN", "LSTM", "Hybrid"]
+    )
 
     # Plot computational cost
     plot_computational_cost(metrics)
