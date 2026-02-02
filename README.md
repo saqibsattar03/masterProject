@@ -78,6 +78,7 @@ Full details, confusion matrix, ROC curves, training plots, and methodology in t
 
 **Full Dissertation**
 Download the full MSc dissertation PDF here
+https://github.com/saqibsattar03/masterProject/blob/master/Saqib-Sattar-MSc-Dissertation-Real-Time-SQL-Injection-Detection.pdf
 
 
 **Future Improvements**
