@@ -88,11 +88,11 @@ Adversarial testing (evasion techniques)
 Integration with real WAF/proxy
 
 
-License
-MIT License (see LICENSE file – add one if not present)
-Contact
+**License**
+MIT License
 
+**Contact**
 GitHub: @saqibsattar03
 LinkedIn: https://www.linkedin.com/in/saqib-sattar-53864a136/
 
-Thank you for checking out the project!
+**Thank you for checking out the project!**
